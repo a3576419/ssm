@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.GoodsMapper">
+	<select id="getItemList" parameterType="string" resultType="Goods">
+		select * FROM goods
+	</select>
+	<insert id="insertItem" parameterType="Goods">
+		INSERT INTO goods (g_oldPrice,g_selfPrice,g_price,g_title)VALUES(#{g_oldPrice},#{g_selfPrice},#{g_price},#{g_title})
+	</insert>
+
+	
+	<select id="getItemCount" resultType="int">
+		SELECT COUNT(*) FROM goods
+	</select>
+	<select id="getItemListByPage" parameterType="MyShopBean" resultType="Goods">
+		SELECT
+			g_oldPrice,
+			g_selfPrice,
+			g_price,
+			g_sharePrice,
+			g_title,
+			g_img,
+			g_subtitle,
+			g_status,
+			g_video,
+			g_videoImg,
+			g_salesCount,
+			g_inventoryNum,
+			g_maxSales
+		FROM goods
+ 		LIMIT #{start}, #{itemCount}
+	</select>
+	<select id="getBannerDataList"  resultType="BannerDataList">
+		Select * FROM Stores ORDER BY RAND() LIMIT 5
+	</select>
+	<select id="getClassifyDataList" parameterType="Stores" resultType="ClassifyDataList">
+		Select * FROM headdata where g_id &gt; 5 and g_id &lt; 23;
+	</select>
+	<select id="getSingleItem_1_DataList" parameterType="Stores" resultType="SingleItem_1_DataList">
+		Select * FROM Stores ORDER BY RAND() LIMIT 5
+	</select>
+	<select id="getSingleItem_2_DataList" parameterType="Stores" resultType="SingleItem_2_DataList">
+		Select * FROM Stores ORDER BY RAND() LIMIT 8
+	</select>
+	<select id="getUnionClassifyDataList" parameterType="Stores" resultType="UnionClassifyDataList">
+		Select * FROM headdata where g_id &gt; 23 and g_id &lt; 28;
+	</select>
+	<select id="getUnionItemDataList" parameterType="Stores" resultType="UnionItemDataList">
+		Select * FROM Stores ORDER BY RAND() LIMIT 5
+	</select>
+</mapper>

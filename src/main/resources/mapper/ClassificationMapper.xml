@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.ClassificationMapper">
+
+
+    <select id="getItem" parameterType="int" resultType="Item">
+        Select g_img,g_title FROM goods ORDER BY RAND() LIMIT #{rand}
+    </select>
+</mapper>
